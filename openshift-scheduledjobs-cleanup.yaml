@@ -1,0 +1,17 @@
+apiVersion: batch/v2alpha1
+kind: ScheduledJob
+metadata:
+  name: scheduledJobsCleanup
+spec:
+  # every half of a hour
+  schedule: "30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          # 10 minutes timeout
+          activeDeadlineSeconds: 600
+          containers:
+          - name: scheduledJobsCleanup
+            image: willemvd/openshift-scheduledjobs-cleanup:latest
+          restartPolicy: OnFailure
