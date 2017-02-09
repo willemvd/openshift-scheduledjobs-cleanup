@@ -1,17 +1,25 @@
-apiVersion: batch/v2alpha1
-kind: ScheduledJob
-metadata:
-  name: scheduled-jobs-cleanup
-spec:
-  # every day at 3.30
-  schedule: "30 3 * * *"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          # 10 minutes timeout
-          activeDeadlineSeconds: 600
-          containers:
-          - name: scheduled-jobs-cleanup
-            image: willemvd/openshift-scheduledjobs-cleanup:1.0.2
-          restartPolicy: OnFailure
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: scheduled-jobs-cleanup
+- apiVersion: batch/v2alpha1
+  kind: ScheduledJob
+  metadata:
+    name: scheduled-jobs-cleanup
+  spec:
+    # every day at 3.30
+    schedule: "59 3 * * *"
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            # 10 minutes timeout
+            activeDeadlineSeconds: 600
+            serviceAccountName: scheduled-jobs-cleanup
+            containers:
+            - name: scheduled-jobs-cleanup
+              image: willemvd/openshift-scheduledjobs-cleanup:latest
+            restartPolicy: OnFailure
