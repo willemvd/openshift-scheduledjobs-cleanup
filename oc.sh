@@ -4,7 +4,7 @@ KUBECONFIG=/tmp/.kube
 
 set -e
 
-oc login https://$KUBERNETES_PORT_443_TCP_ADDR$KUBERNETES_SERVICE_PORT_HTTPS --token `cat /var/run/secrets/kubernetes.io/serviceaccount/token`
+oc login https://$KUBERNETES_PORT_443_TCP_ADDR:$KUBERNETES_SERVICE_PORT_HTTPS --token `cat /var/run/secrets/kubernetes.io/serviceaccount/token`
 oc get jobs > /tmp/jobs
 tail -n +2 /tmp/jobs > /tmp/jobs-without-header
 

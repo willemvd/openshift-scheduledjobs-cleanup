@@ -3,8 +3,8 @@ kind: ScheduledJob
 metadata:
   name: scheduled-jobs-cleanup
 spec:
-  # every half of a hour
-  schedule: "30 * * * *"
+  # every day at 3.30
+  schedule: "30 3 * * *"
   jobTemplate:
     spec:
       template:
@@ -13,5 +13,5 @@ spec:
           activeDeadlineSeconds: 600
           containers:
           - name: scheduled-jobs-cleanup
-            image: willemvd/openshift-scheduledjobs-cleanup:1.0.1
+            image: willemvd/openshift-scheduledjobs-cleanup:1.0.2
           restartPolicy: OnFailure
