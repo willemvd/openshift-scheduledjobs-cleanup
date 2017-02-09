@@ -1,6 +1,6 @@
 #!/bin/sh
 
-KUBECONFIG=/tmp/.kube
+export KUBECONFIG=/tmp/.kube
 
 set -e
 
