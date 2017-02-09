@@ -11,7 +11,7 @@ items:
     name: scheduled-jobs-cleanup
   spec:
     # every day at 3.30
-    schedule: "59 3 * * *"
+    schedule: "1 * * * *"
     jobTemplate:
       spec:
         template:
@@ -22,4 +22,5 @@ items:
             containers:
             - name: scheduled-jobs-cleanup
               image: willemvd/openshift-scheduledjobs-cleanup:latest
+              imagePullPolicy: Always
             restartPolicy: OnFailure

@@ -16,7 +16,7 @@ while read JOB_WITH_STATS
 do
     JOB=$(eval echo "${JOB_WITH_STATS}" | awk '{print $1}')
     SUCCESSFUL_RUN=$(eval echo "${JOB_WITH_STATS}" | awk '{print $3}')
-    if [ ${SUCCESSFUL_RUN} == "0" ]; then
+    if [ ${SUCCESSFUL_RUN} == "1" ]; then
       echo "Successfully ended job ${JOB}, delete it"
       oc delete job ${JOB} -n ${DEFAULT_NAMESPACE}
     else
