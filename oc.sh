@@ -23,3 +23,7 @@ do
       echo "\"${JOB}\" not successfully ended"
     fi
 done < /tmp/jobs-without-header
+
+echo "Start - Deleting pods in error state"
+oc get pods | grep "Error" | gawk '{print $1}' | xargs oc delete pod
+echo "Done - Deleting pods in error state"
