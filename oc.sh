@@ -25,5 +25,5 @@ do
 done < /tmp/jobs-without-header
 
 echo "Start - Deleting pods in error state"
-oc get pods | grep "Error" | gawk '{print $1}' | xargs oc delete pod
+oc get pods | grep "Error" | awk '{print $1}' | xargs oc delete pod
 echo "Done - Deleting pods in error state"
