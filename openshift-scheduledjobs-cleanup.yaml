@@ -21,5 +21,5 @@ items:
             serviceAccountName: scheduled-jobs-cleanup
             containers:
             - name: scheduled-jobs-cleanup
-              image: willemvd/openshift-scheduledjobs-cleanup:1.1.0
+              image: willemvd/openshift-scheduledjobs-cleanup:1.1.1
             restartPolicy: OnFailure
