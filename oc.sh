@@ -25,5 +25,11 @@ do
 done < /tmp/jobs-without-header
 
 echo "Start - Deleting pods in error state"
-oc get pods | grep "Error" | awk '{print $1}' | xargs oc delete pod
+oc get pods -n ${DEFAULT_NAMESPACE} | grep "Error" > /tmp/pods-in-error
+while read ERROR_POD
+do
+    POD=$(eval echo "${ERROR_POD}" | awk '{print $1}')
+    oc delete pod ${POD} -n ${DEFAULT_NAMESPACE}
+    echo "Successfully deleted pod \"${POD}\""
+done < /tmp/pods-in-error
 echo "Done - Deleting pods in error state"
